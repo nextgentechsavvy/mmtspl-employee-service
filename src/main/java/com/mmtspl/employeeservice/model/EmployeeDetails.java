@@ -14,7 +14,7 @@ public class EmployeeDetails {
 	
 	
 	public EmployeeDetails() {
-		super();
+		//super();
 	}
 	
 	public EmployeeDetails(int employeeId, String employeeName, String employeeSalary, int employeeAge, String employeeDesignation, String employeeAddress, String departmentName, String departmentLocation) {

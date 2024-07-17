@@ -1,14 +1,12 @@
 package com.mmtspl.employeeservice.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.mmtspl.employeeservice.exception.EmployeeInfoByIDNotFoundException;
 import com.mmtspl.employeeservice.exception.EmployeeInfoByNameNotFoundException;
 import com.mmtspl.employeeservice.exception.NoEmployeeDataFoundException;
-import com.mmtspl.employeeservice.model.Address_Master;
-import com.mmtspl.employeeservice.model.EmployeeAddress;
-import com.mmtspl.employeeservice.model.Employee_Master;
-import com.mmtspl.employeeservice.model.MySQLBDUrls;
+import com.mmtspl.employeeservice.model.*;
 import com.mmtspl.employeeservice.repository.EmployeeRepository;
 
 import org.slf4j.Logger;
@@ -28,51 +26,75 @@ public class EmployeeService {
 	private EmployeeRepository employeeRepository;
 	
 	private Boolean matched = false;
-	
+	private List<EmployeeDetails> employeeDetailsList;
 	
 	Logger logger = LoggerFactory.getLogger(EmployeeService.class);
 	
 	
 	// ****************** Calling from FrontController ********************** //
 
-	public List<Employee_Master> getAllEmployee() {
-		List<Employee_Master> employeeList = employeeRepository.getAllEmployee(); 
-		List<Address_Master> addressList = null;
-		String strArress = "";
-		
+	public List<EmployeeDetails> getAllEmployeeDetails() {
+		employeeDetailsList = new ArrayList<EmployeeDetails>();
+		List<Employee_Master> employeeList = employeeRepository.getAllEmployee();
+
 		if(employeeList.isEmpty())
-			 throw new NoEmployeeDataFoundException();
-		else {
-			List<Integer> employeeIDList = getEmployeeIDListFromAddress();
-			for(Employee_Master empList : employeeList) {
-				if(empList != null) {
-					
-					boolean bVal = employeeIDList.stream().anyMatch((n -> n.equals(empList.getEmployeeId())));
-					//logger.info("---bVal----"+ bVal);
-					if(bVal) {
-						addressList = getAddressByEmployeeID(empList.getEmployeeId()); // Address List taken for multiple address of an Employee
-						if(addressList != null) {
-							logger.info("-------"+ addressList.get(0).getAddressId());
-							
-							strArress = addressList.get(0).getAddressType() + ": " + 
-									addressList.get(0).getLocality()+ " " + addressList.get(0).getCity()+ " " + addressList.get(0).getCountry()+ " " + 
-									addressList.get(0).getState()+ " " + addressList.get(0).getZipcode()+"\n";
-							if(addressList.size()>1) {
-								strArress = strArress + addressList.get(1).getAddressType() + ": " + 
-										addressList.get(1).getLocality()+ " " + addressList.get(1).getCity()+ " " + addressList.get(1).getCountry()+ " " + 
-										addressList.get(1).getState()+ " " + addressList.get(1).getZipcode();
-								
+			throw new NoEmployeeDataFoundException();
+		else{
+			employeeDetailsList = copyEmployeeListToEmployeeDetails(employeeList);
+			List<Address_Master> addressList = null;
+			String strArress = "";
+
+			if(employeeDetailsList.isEmpty())
+				throw new NoEmployeeDataFoundException();
+			else {
+				List<Integer> employeeIDList = getEmployeeIDListFromAddress();
+				for(EmployeeDetails empDetails : employeeDetailsList) {
+					if(empDetails != null) {
+
+						boolean bVal = employeeIDList.stream().anyMatch((n -> n.equals(empDetails.getEmployeeId())));
+						//logger.info("---bVal----"+ bVal);
+						if(bVal) {
+							addressList = getAddressByEmployeeID(empDetails.getEmployeeId()); // Address List taken for multiple address of an Employee
+							if(addressList != null) {
+								logger.info("Address ID ------- : "+ addressList.get(0).getAddressId());
+
+								strArress = addressList.get(0).getAddressType() + ": " +
+										addressList.get(0).getLocality()+ " " + addressList.get(0).getCity()+ " " + addressList.get(0).getCountry()+ " " +
+										addressList.get(0).getState()+ " " + addressList.get(0).getZipcode()+"\n";
+								if(addressList.size()>1) {
+									strArress = strArress + addressList.get(1).getAddressType() + ": " +
+											addressList.get(1).getLocality()+ " " + addressList.get(1).getCity()+ " " + addressList.get(1).getCountry()+ " " +
+											addressList.get(1).getState()+ " " + addressList.get(1).getZipcode();
+
+								}
+								empDetails.setEmployeeAddress(strArress);
 							}
-							
-							empList.setEmployeeAddress(strArress);
-						}	
+						}
+
+
 					}
-							
-					
 				}
 			}
 		}
-		return employeeList;
+
+		return employeeDetailsList;
+	}
+
+	private List<EmployeeDetails> copyEmployeeListToEmployeeDetails(List<Employee_Master> employeeList){
+		List<EmployeeDetails> employeeDetailsList = new ArrayList<EmployeeDetails>();
+		EmployeeDetails empDetails = null;
+
+		for(Employee_Master empMaster : employeeList) {
+			empDetails = new EmployeeDetails();
+			empDetails.setEmployeeId(empMaster.getEmployeeId());
+			empDetails.setEmployeeName(empMaster.getEmployeeName());
+			empDetails.setEmployeeSalary(empMaster.getEmployeeSalary());
+			empDetails.setEmployeeAge(empMaster.getEmployeeAge());
+			empDetails.setEmployeeDesignation(empMaster.getEmployeeDesignation());
+			empDetails.setEmployeeAddress(empMaster.getEmployeeAddress());
+			employeeDetailsList.add(empDetails);
+		}
+		return employeeDetailsList;
 	}
 
 	public List<Integer> getEmployeeIDListFromAddress() {
@@ -103,8 +125,9 @@ public class EmployeeService {
 		ResponseEntity<List<Address_Master>> responseEntity = null;
 		List<Address_Master> addressList=null;
 		try {
-		    	RestTemplate restTemplate = new RestTemplate();
-		    	responseEntity = restTemplate.exchange("http://localhost:8765/mmtspl-address-service/restapiaddressservices/getAddressByEmployeeID/"+employeeId, HttpMethod.GET,
+				logger.info("Matched Employee ID-------: "+ employeeId);
+				RestTemplate restTemplate = new RestTemplate();
+		    	responseEntity = restTemplate.exchange("http://localhost:9002/restapiaddressservices/getAddressByEmployeeID/"+employeeId, HttpMethod.GET,
 		    			  null, new ParameterizedTypeReference<List<Address_Master>>(){});
 		}catch(Exception e) {
 		    	e.printStackTrace();
@@ -120,11 +143,17 @@ public class EmployeeService {
 		
 		return addressList;
 	}
- 	
-	
-	
-	
-	public Employee_Master getEmployeeById(int employeeId) {
+
+
+
+
+	public List<Employee_Master> getAllEmployee() {
+		List<Employee_Master> employeeList = employeeRepository.getAllEmployee();
+		return employeeList;
+	}
+
+
+		public Employee_Master getEmployeeById(int employeeId) {
 		
 		//return employeeRepository.getEmployee(id).orElseThrow(() -> new EmployeeNotFoundException(id));;
 		Employee_Master employee = employeeRepository.getEmployeeById(employeeId);

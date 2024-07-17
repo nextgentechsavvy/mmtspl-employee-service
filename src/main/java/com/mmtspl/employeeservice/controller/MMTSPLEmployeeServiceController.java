@@ -2,11 +2,8 @@ package com.mmtspl.employeeservice.controller;
 
 import java.util.List;
 import javax.transaction.Transactional;
-import com.mmtspl.employeeservice.model.Address_Master;
-import com.mmtspl.employeeservice.model.Department_Master;
-import com.mmtspl.employeeservice.model.EmployeeAddress;
-import com.mmtspl.employeeservice.model.Employee_Master;
-import com.mmtspl.employeeservice.model.MySQLBDUrls;
+
+import com.mmtspl.employeeservice.model.*;
 import com.mmtspl.employeeservice.service.AddressService;
 import com.mmtspl.employeeservice.service.DepartmentService;
 import com.mmtspl.employeeservice.service.EmployeeService;
@@ -81,6 +78,13 @@ public class MMTSPLEmployeeServiceController {
 	
 	
 	// ****************** Calling from FrontController ********************** //
+
+	@Transactional
+	//@GetMapping("/getAllEmployeeDetails")
+	@GetMapping("${rest.get.mapping.getAllEmployeeDetails}")
+	public List<EmployeeDetails> getAllEmployeeDetails() {
+		return employeeService.getAllEmployeeDetails();
+	}
 
 	@Transactional
 	//@GetMapping("/getAllEmployee")
