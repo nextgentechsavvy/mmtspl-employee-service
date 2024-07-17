@@ -76,18 +76,14 @@ application.properties
 Url
 
 	http://localhost:9000/restapiemployeeservices/employeeservices
-	http://localhost:8765/mmtspl-employee-service/restapiemployeeservices/employeeservices
 
 	http://localhost:9000/restapiemployeeservices/getAllEmployee
-	http://localhost:8765/mmtspl-employee-service/restapiemployeeservices/getAllEmployee
 
   	http://localhost:9000/restapiemployeeservices/getEmployeeById/1000
-	http://localhost:8765/mmtspl-employee-service/restapiemployeeservices/getEmployeeById/1000
 
   	http://localhost:9000/restapiemployeeservices/deleteEmployee/2000
-	http://localhost:8765/mmtspl-employee-service/restapiemployeeservices/deleteEmployee/2000
-  	
-  	 	
+
+
   	http://localhost:9000/restapiservices/getAllDepartments
   	http://localhost:9000/restapiservices/getDepartmentByID/2000
   	
@@ -98,16 +94,14 @@ Url
   	
   	@NamedQuery
   	http://localhost:9000/restapiemployeeservices/getEmployeeByName/Mithun Majumdar
-  	http://localhost:8765/mmtspl-employee-service/restapiemployeeservices/getEmployeeByName/Mithun Majumdar
-  	
+
   	http://localhost:9000/restapiservices/getDepartmentByName/IT-Backend
 	http://localhost:9000/restapiservices/getAddressByCity/Pune
 	
 	
 	Join using @NamedQuery
 	http://localhost:9000/restapiemployeeservices/getEmpDeptDetailsByEmpId/1000
-	http://localhost:8765/mmtspl-employee-service/restapiemployeeservices/getEmpDeptDetailsByEmpId/1000
-	
+
 	  	
   	Global Exceptions ::
   	http://localhost:9000/restapiemployeeservices/getEmployeeById/100000

@@ -81,22 +81,22 @@ public class HibernateConfiguration {
 		//mySQLBDUrls = new MySQLBDUrlsService().getMySQLBDUrls(baseUrl, port, mySQLBDUrlsServiceUri);
 		
 		//Calling using Zull API Gateway Server
-		mySQLBDUrls = new MySQLBDUrlsService().getMySQLBDUrlsZullAPIGateway(zullAPIGatewayHTTP, zullAPIGatewayIP, 
-				zullAPIGatewayPort, dbServiceApplicationName, mySQLBDUrlsServiceUri);
+		//mySQLBDUrls = new MySQLBDUrlsService().getMySQLBDUrlsZullAPIGateway(zullAPIGatewayHTTP, zullAPIGatewayIP,
+		//		zullAPIGatewayPort, dbServiceApplicationName, mySQLBDUrlsServiceUri);
 		
-		if(mySQLBDUrls.getStatus() == false) {
+		//if(mySQLBDUrls.getStatus() == false) {
 			System.out.println("DB Url 111 : " + URL);
 			dataSource.setDriverClassName(DRIVER);
 			dataSource.setUrl(URL);
 			dataSource.setUsername(USERNAME);
 			dataSource.setPassword(PASSWORD);
-		}else {
+		/*}else {
 			System.out.println("DB Url : " + mySQLBDUrls.getUrl());
 			dataSource.setDriverClassName(mySQLBDUrls.getDriver());
 			dataSource.setUrl(mySQLBDUrls.getUrl());
 			dataSource.setUsername(mySQLBDUrls.getUsername());
 			dataSource.setPassword(mySQLBDUrls.getPassword());
-		}
+		}*/
 		System.out.println("DB Url : " + dataSource.getUrl());
 		return dataSource;
 	}
@@ -108,17 +108,17 @@ public class HibernateConfiguration {
 		Properties hibernateProperties = new Properties();
 		
 		
-		if(mySQLBDUrls.getStatus() == false) {
+		//if(mySQLBDUrls.getStatus() == false) {
 			sessionFactory.setPackagesToScan(PACKAGES_TO_SCAN);
 			hibernateProperties.put("hibernate.dialect", DIALECT);
 			hibernateProperties.put("hibernate.show_sql", SHOW_SQL);
 			hibernateProperties.put("hibernate.hbm2ddl.auto", HBM2DDL_AUTO);
-		}else {
+		/*}else {
 			sessionFactory.setPackagesToScan(mySQLBDUrls.getEntitymanager_packagesToScan());
 			hibernateProperties.put("hibernate.dialect", mySQLBDUrls.getHibernate_dialect());
 			hibernateProperties.put("hibernate.show_sql", mySQLBDUrls.getHibernate_show_sql());
 			hibernateProperties.put("hibernate.hbm2ddl.auto", mySQLBDUrls.getHibernate_hbm2ddl_auto());
-		}
+		}*/
 		
 		sessionFactory.setHibernateProperties(hibernateProperties);
 

@@ -81,8 +81,10 @@ public class EmployeeService {
 		
 		try {
 		    	RestTemplate restTemplate = new RestTemplate();
-		    	responseEntity = restTemplate.exchange("http://localhost:8765/mmtspl-address-service/restapiaddressservices/getAllEmployeeID", HttpMethod.GET,
-		    			  null, new ParameterizedTypeReference<List<Integer>>(){});
+		    	//responseEntity = restTemplate.exchange("http://localhost:8765/mmtspl-address-service/restapiaddressservices/getAllEmployeeID", HttpMethod.GET,
+		    	//		  null, new ParameterizedTypeReference<List<Integer>>(){});
+				responseEntity = restTemplate.exchange("http://localhost:9002/restapiaddressservices/getAllEmployeeID", HttpMethod.GET,
+			 			  null, new ParameterizedTypeReference<List<Integer>>(){});
 		}catch(Exception e) {
 		    	e.printStackTrace();
 		}finally {
