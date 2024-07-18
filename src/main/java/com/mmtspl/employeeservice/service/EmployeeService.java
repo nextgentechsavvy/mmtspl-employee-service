@@ -199,7 +199,7 @@ public class EmployeeService {
 
 		try {
 			RestTemplate restTemplate = new RestTemplate();
-			responseEntity = restTemplate.exchange("http://localhost:9002/restapiaddressservices/getAllAddressEmployeeID", HttpMethod.GET,
+			responseEntity = restTemplate.exchange("http://192.168.223.13:30902/restapiaddressservices/getAllAddressEmployeeID", HttpMethod.GET,
 					null, new ParameterizedTypeReference<List<Integer>>(){});
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -218,7 +218,7 @@ public class EmployeeService {
 		try {
 			logger.info("Matched Employee ID-------: "+ employeeId);
 			RestTemplate restTemplate = new RestTemplate();
-			responseEntity = restTemplate.exchange("http://localhost:9002/restapiaddressservices/getAddressByEmployeeID/"+employeeId, HttpMethod.GET,
+			responseEntity = restTemplate.exchange("http://192.168.223.13:30902/restapiaddressservices/getAddressByEmployeeID/"+employeeId, HttpMethod.GET,
 					null, new ParameterizedTypeReference<List<Address_Master>>(){});
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -236,7 +236,7 @@ public class EmployeeService {
 
 		try {
 			RestTemplate restTemplate = new RestTemplate();
-			responseEntity = restTemplate.exchange("http://localhost:9001/restapidepartmentservices/getAllDepartmentEmployeeID", HttpMethod.GET,
+			responseEntity = restTemplate.exchange("http://192.168.223.13:30901/restapidepartmentservices/getAllDepartmentEmployeeID", HttpMethod.GET,
 					null, new ParameterizedTypeReference<List<Integer>>(){});
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -254,7 +254,7 @@ public class EmployeeService {
 		try {
 			logger.info("Matched Employee ID-------: "+ employeeId);
 			RestTemplate restTemplate = new RestTemplate();
-			responseEntity = restTemplate.exchange("http://localhost:9001/restapidepartmentservices/getDepartmentByEmployeeID/"+employeeId, HttpMethod.GET,
+			responseEntity = restTemplate.exchange("http://192.168.223.13:30901/restapidepartmentservices/getDepartmentByEmployeeID/"+employeeId, HttpMethod.GET,
 					null, new ParameterizedTypeReference<List<Department_Master>>(){});
 		}catch(Exception e) {
 			e.printStackTrace();
