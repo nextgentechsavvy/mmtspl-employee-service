@@ -114,7 +114,11 @@ Url
   	http://localhost:9000/restapiservices/getAddressByCity/Nagpur
   	
   	
-  	
+//------------ Get All Employee Details from Employee DB, Address DB and Department DB --------------------------//
+
+	http://localhost:9000/restapiemployeeservices/getAllEmployeeDetails
+
+//------------ Get All Employee Details from Employee DB, Address DB and Department DB --------------------------//
    
    
    

@@ -80,13 +80,6 @@ public class MMTSPLEmployeeServiceController {
 	// ****************** Calling from FrontController ********************** //
 
 	@Transactional
-	//@GetMapping("/getAllEmployeeDetails")
-	@GetMapping("${rest.get.mapping.getAllEmployeeDetails}")
-	public List<EmployeeDetails> getAllEmployeeDetails() {
-		return employeeService.getAllEmployeeDetails();
-	}
-
-	@Transactional
 	//@GetMapping("/getAllEmployee")
 	@GetMapping("${rest.get.mapping.getAllEmployee}")
 	public List<Employee_Master> getAllEmployee() {
@@ -100,11 +93,6 @@ public class MMTSPLEmployeeServiceController {
 		return employeeService.getAddressByEmployeeID(employeeId);
 	}
 
-	
-	
-	
-	
-	
 	@Transactional
 	//@GetMapping("/getEmployeeById/{employeeId}")
 	@GetMapping("${rest.get.mapping.getEmployeeById}")
@@ -171,13 +159,23 @@ public class MMTSPLEmployeeServiceController {
 	
 	// ****************** @NamedQueries ********************** //
 
+	//------------ Get All Employee Details from Employee DB, Address DB and Department DB --------------------------//
+
 	@Transactional
 	@GetMapping("/getEmpDeptDetailsByEmpId/{employeeID}")
 	public List<Object[]> getEmpDeptDetailsByEmpId(@PathVariable int employeeID) {
 		return employeeService.getEmpDeptDetailsByEmpId(employeeID);
 	}
 
-	
+	@Transactional
+	//@GetMapping("/getAllEmployeeDetails")
+	@GetMapping("${rest.get.mapping.getAllEmployeeDetails}")
+	public List<EmployeeDetails> getAllEmployeeDetails() {
+		return employeeService.getAllEmployeeDetails();
+	}
+
+	//------------ Get All Employee Details from Employee DB, Address DB and Department DB --------------------------//
+
 	//********************************* Employee_Master End *********************************************//
 
 	
