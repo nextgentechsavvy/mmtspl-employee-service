@@ -10,17 +10,17 @@ pipeline{
                 bat 'mvn clean install'
             }
         }
-        stage('Build docker image'){
-            steps{
-                         // Docker image name ::  devops-integration
-                         bat 'docker build -t mmtspl-employee-service-1.0.0-snapshot .'
-            }
-        }
         stage('Login to DockerHub'){
             steps{
                     withCredentials([string(credentialsId: 'nextgentechsavvy-docker-hub-pwd', variable: 'nextgentechsavvy-docker-hub-pwd')]) {
                         bat 'type nextgentechsavvy-docker-hub-token.txt | docker login --username nextgentechsavvy --password-stdin'
                   }
+            }
+        }
+        stage('Build docker image'){
+            steps{
+                         // Docker image name ::  devops-integration
+                         bat 'docker build -t mmtspl-employee-service-1.0.0-snapshot .'
             }
         }
         stage('Tag docker image to the DockerHub image'){
