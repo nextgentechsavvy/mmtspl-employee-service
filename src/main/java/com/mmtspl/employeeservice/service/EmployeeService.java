@@ -12,6 +12,7 @@ import com.mmtspl.employeeservice.repository.EmployeeRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
@@ -29,8 +30,22 @@ public class EmployeeService {
 	List<EmployeeDetails> employeeDetailsList;
 	
 	Logger logger = LoggerFactory.getLogger(EmployeeService.class);
-	
-	
+
+	//------------ Get All Employee Details from Employee DB, Address DB and Department DB --------------------------//
+	@Value("${rest.get.url.employeeIDListFromAddress}")
+	String employeeIDListFromAddress;
+
+	@Value("${rest.get.url.addressByEmployeeID}")
+	String addressByEmployeeID;
+
+	@Value("${rest.get.url.allDepartmentEmployeeID}")
+	String allDepartmentEmployeeID;
+
+	@Value("${rest.get.url.departmentByEmployeeID}")
+	String departmentByEmployeeID;
+	//------------ Get All Employee Details from Employee DB, Address DB and Department DB --------------------------//
+
+
 	// ****************** Calling from FrontController ********************** //
 
 	public List<Employee_Master> getAllEmployee() {
@@ -199,7 +214,9 @@ public class EmployeeService {
 
 		try {
 			RestTemplate restTemplate = new RestTemplate();
-			responseEntity = restTemplate.exchange("http://192.168.223.13:30902/restapiaddressservices/getAllAddressEmployeeID", HttpMethod.GET,
+			//responseEntity = restTemplate.exchange("http://localhost:9002/restapiaddressservices/getAllAddressEmployeeID", HttpMethod.GET,
+			//		null, new ParameterizedTypeReference<List<Integer>>(){});
+			responseEntity = restTemplate.exchange(employeeIDListFromAddress, HttpMethod.GET,
 					null, new ParameterizedTypeReference<List<Integer>>(){});
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -217,7 +234,9 @@ public class EmployeeService {
 		try {
 			logger.info("Matched Employee ID-------: "+ employeeId);
 			RestTemplate restTemplate = new RestTemplate();
-			responseEntity = restTemplate.exchange("http://192.168.223.13:30902/restapiaddressservices/getAddressByEmployeeID/"+employeeId, HttpMethod.GET,
+			//responseEntity = restTemplate.exchange("http://localhost:9002/restapiaddressservices/getAddressByEmployeeID/"+employeeId, HttpMethod.GET,
+			//		null, new ParameterizedTypeReference<List<Address_Master>>(){});
+			responseEntity = restTemplate.exchange(addressByEmployeeID +employeeId, HttpMethod.GET,
 					null, new ParameterizedTypeReference<List<Address_Master>>(){});
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -235,7 +254,9 @@ public class EmployeeService {
 
 		try {
 			RestTemplate restTemplate = new RestTemplate();
-			responseEntity = restTemplate.exchange("http://192.168.223.13:30901/restapidepartmentservices/getAllDepartmentEmployeeID", HttpMethod.GET,
+			//responseEntity = restTemplate.exchange("http://localhost:9001/restapidepartmentservices/getAllDepartmentEmployeeID", HttpMethod.GET,
+			//		null, new ParameterizedTypeReference<List<Integer>>(){});
+			responseEntity = restTemplate.exchange(allDepartmentEmployeeID, HttpMethod.GET,
 					null, new ParameterizedTypeReference<List<Integer>>(){});
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -253,7 +274,9 @@ public class EmployeeService {
 		try {
 			logger.info("Matched Employee ID-------: "+ employeeId);
 			RestTemplate restTemplate = new RestTemplate();
-			responseEntity = restTemplate.exchange("http://192.168.223.13:30901/restapidepartmentservices/getDepartmentByEmployeeID/"+employeeId, HttpMethod.GET,
+			//responseEntity = restTemplate.exchange("http://localhost:9001/restapidepartmentservices/getDepartmentByEmployeeID/"+employeeId, HttpMethod.GET,
+			//		null, new ParameterizedTypeReference<List<Department_Master>>(){});
+			responseEntity = restTemplate.exchange(departmentByEmployeeID +employeeId, HttpMethod.GET,
 					null, new ParameterizedTypeReference<List<Department_Master>>(){});
 		}catch(Exception e) {
 			e.printStackTrace();
