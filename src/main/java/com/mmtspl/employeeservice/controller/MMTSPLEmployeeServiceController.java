@@ -170,8 +170,8 @@ public class MMTSPLEmployeeServiceController {
 	@Transactional
 	//@GetMapping("/getAllEmployeeDetails")
 	@GetMapping("${rest.get.mapping.getAllEmployeeDetails}")
-	public List<EmployeeDetails> getAllEmployeeDetails() {
-		return employeeService.getAllEmployeeDetails();
+	public List<EmployeeCompleteDetails> getEmployeeCompleteDetails() {
+		return employeeService.getEmployeeCompleteDetails();
 	}
 
 	//------------ Get All Employee Details from Employee DB, Address DB and Department DB --------------------------//

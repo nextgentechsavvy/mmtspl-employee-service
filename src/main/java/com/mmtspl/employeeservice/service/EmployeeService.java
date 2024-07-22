@@ -27,7 +27,7 @@ public class EmployeeService {
 	EmployeeRepository employeeRepository;
 	
 	Boolean matched = true;
-	List<EmployeeDetails> employeeDetailsList;
+	List<EmployeeCompleteDetails> employeeDetailsList;
 	
 	Logger logger = LoggerFactory.getLogger(EmployeeService.class);
 
@@ -123,7 +123,7 @@ public class EmployeeService {
 
 	//------------ Get All Employee Details from Employee DB, Address DB and Department DB --------------------------//
 
-	public List<EmployeeDetails> getAllEmployeeDetails() {
+	public List<EmployeeCompleteDetails> getEmployeeCompleteDetails() {
 		employeeDetailsList = new ArrayList<>();
 		List<Employee_Master> employeeList = employeeRepository.getAllEmployee();
 
@@ -140,7 +140,7 @@ public class EmployeeService {
 			else {
 				//Add Address Details to Employee Details List from Address_Master Database
 				List<Integer> employeeIDList = getEmployeeIDListFromAddress();
-				for(EmployeeDetails empDetails : employeeDetailsList) {
+				for(EmployeeCompleteDetails empDetails : employeeDetailsList) {
 					if(empDetails != null) {
 
 						boolean bVal = employeeIDList.stream().anyMatch((n -> n.equals(empDetails.getEmployeeId())));
@@ -167,7 +167,7 @@ public class EmployeeService {
 
 				//Add Department Details to Employee Details List from Department_Master Database
 				employeeIDList = getAllDepartmentEmployeeID();
-				for(EmployeeDetails empDetails : employeeDetailsList) {
+				for(EmployeeCompleteDetails empDetails : employeeDetailsList) {
 					if(empDetails != null) {
 
 						boolean bVal = employeeIDList.stream().anyMatch((n -> n.equals(empDetails.getEmployeeId())));
@@ -188,12 +188,12 @@ public class EmployeeService {
 		return employeeDetailsList;
 	}
 
-	private List<EmployeeDetails> copyEmployeeListToEmployeeDetails(List<Employee_Master> employeeList){
-		List<EmployeeDetails> employeeDetailsList = new ArrayList<>();
-		EmployeeDetails empDetails;
+	private List<EmployeeCompleteDetails> copyEmployeeListToEmployeeDetails(List<Employee_Master> employeeList){
+		List<EmployeeCompleteDetails> employeeDetailsList = new ArrayList<>();
+		EmployeeCompleteDetails empDetails;
 
 		for(Employee_Master empMaster : employeeList) {
-			empDetails = new EmployeeDetails();
+			empDetails = new EmployeeCompleteDetails();
 			empDetails.setEmployeeId(empMaster.getEmployeeId());
 			empDetails.setEmployeeName(empMaster.getEmployeeName());
 			empDetails.setEmployeeSalary(empMaster.getEmployeeSalary());

@@ -1,6 +1,6 @@
 package com.mmtspl.employeeservice.model;
 
-public class EmployeeDetails {
+public class EmployeeCompleteDetails {
 
 	private int employeeId;
 	private String employeeName; 
@@ -13,11 +13,11 @@ public class EmployeeDetails {
 
 	
 	
-	public EmployeeDetails() {
+	public EmployeeCompleteDetails() {
 		//super();
 	}
 	
-	public EmployeeDetails(int employeeId, String employeeName, String employeeSalary, int employeeAge, String employeeDesignation, String employeeAddress, String departmentName, String departmentLocation) {
+	public EmployeeCompleteDetails(int employeeId, String employeeName, String employeeSalary, int employeeAge, String employeeDesignation, String employeeAddress, String departmentName, String departmentLocation) {
 		super();
 		this.employeeId = employeeId;
 		this.employeeName = employeeName;
