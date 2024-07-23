@@ -8,16 +8,16 @@ public class EmployeeCompleteDetails {
 	private int employeeAge;
 	private String employeeDesignation;
 	private String employeeAddress;
-	private String departmentName; 
-	private String departmentLocation;
+	private String employeeDepartmentName;
+	private String employeeDepartmentLocation;
 
 	
 	
 	public EmployeeCompleteDetails() {
-		//super();
+		super();
 	}
 	
-	public EmployeeCompleteDetails(int employeeId, String employeeName, String employeeSalary, int employeeAge, String employeeDesignation, String employeeAddress, String departmentName, String departmentLocation) {
+	public EmployeeCompleteDetails(int employeeId, String employeeName, String employeeSalary, int employeeAge, String employeeDesignation, String employeeAddress, String employeeDepartmentName, String employeeDepartmentLocation) {
 		super();
 		this.employeeId = employeeId;
 		this.employeeName = employeeName;
@@ -25,8 +25,8 @@ public class EmployeeCompleteDetails {
 		this.employeeAge = employeeAge;
 		this.employeeDesignation = employeeDesignation;
 		this.employeeAddress = employeeAddress;
-		this.departmentName = departmentName;
-		this.departmentLocation = departmentLocation;
+		this.employeeDepartmentName = employeeDepartmentName;
+		this.employeeDepartmentLocation = employeeDepartmentLocation;
 	}
 	
 	
@@ -79,20 +79,20 @@ public class EmployeeCompleteDetails {
 		this.employeeAddress = employeeAddress;
 	}
 
-	public String getDepartmentName() {
-		return departmentName;
+	public String getEmployeeDepartmentName() {
+		return employeeDepartmentName;
 	}
 
-	public void setDepartmentName(String departmentName) {
-		this.departmentName = departmentName;
+	public void setEmployeeDepartmentName(String employeeDepartmentName) {
+		this.employeeDepartmentName = employeeDepartmentName;
 	}
 
-	public String getDepartmentLocation() {
-		return departmentLocation;
+	public String getEmployeeDepartmentLocation() {
+		return employeeDepartmentLocation;
 	}
 
-	public void setDepartmentLocation(String departmentLocation) {
-		this.departmentLocation = departmentLocation;
+	public void setEmployeeDepartmentLocation(String employeeDepartmentLocation) {
+		this.employeeDepartmentLocation = employeeDepartmentLocation;
 	}
 
 

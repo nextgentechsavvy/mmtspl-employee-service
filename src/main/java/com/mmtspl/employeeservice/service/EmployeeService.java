@@ -176,8 +176,8 @@ public class EmployeeService {
 							departmentList = getDepartmentByEmployeeID(empDetails.getEmployeeId()); // Department List taken for multiple address of an Employee
 							if(departmentList != null) {
 								logger.info("Department ID ------- : "+ departmentList.get(0).getDepartmentId());
-								empDetails.setDepartmentName(departmentList.get(0).getDepartmentName());
-								empDetails.setDepartmentLocation(departmentList.get(0).getDepartmentLocation());
+								empDetails.setEmployeeDepartmentName(departmentList.get(0).getDepartmentName());
+								empDetails.setEmployeeDepartmentLocation(departmentList.get(0).getDepartmentLocation());
 							}
 						}
 					}
@@ -200,8 +200,8 @@ public class EmployeeService {
 			empDetails.setEmployeeAge(empMaster.getEmployeeAge());
 			empDetails.setEmployeeDesignation(empMaster.getEmployeeDesignation());
 			empDetails.setEmployeeAddress(empMaster.getEmployeeAddress());
-			empDetails.setDepartmentName("");
-			empDetails.setDepartmentLocation("");
+			empDetails.setEmployeeDepartmentName("");
+			empDetails.setEmployeeDepartmentLocation("");
 
 			employeeDetailsList.add(empDetails);
 		}
