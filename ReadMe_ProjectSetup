@@ -116,7 +116,7 @@ Url
   	
 //------------ Get All Employee Details from Employee DB, Address DB and Department DB --------------------------//
 
-	http://localhost:9000/restapiemployeeservices/getEmployeeCompleteDetails
+	http://localhost:9000/restapiemployeeservices/getEmployeeCompleteDetailsList
 
 //------------ Get All Employee Details from Employee DB, Address DB and Department DB --------------------------//
    

@@ -123,7 +123,7 @@ public class EmployeeService {
 
 	//------------ Get All Employee Details from Employee DB, Address DB and Department DB --------------------------//
 
-	public List<EmployeeCompleteDetails> getEmployeeCompleteDetails() {
+	public List<EmployeeCompleteDetails> getEmployeeCompleteDetailsList() {
 		employeeDetailsList = new ArrayList<>();
 		List<Employee_Master> employeeList = employeeRepository.getAllEmployee();
 
