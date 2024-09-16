@@ -148,7 +148,7 @@ public class EmployeeService {
 						if(bVal) {
 							addressList = getAddressByEmployeeID(empDetails.getEmployeeId()); // Address List taken for multiple address of an Employee
 							if(addressList != null) {
-								logger.info("Address ID ------- : "+ addressList.get(0).getAddressId());
+								//logger.info("Address ID ------- : "+ addressList.get(0).getAddressId());
 
 								strAddress = addressList.get(0).getAddressType() + ": " +
 										addressList.get(0).getLocality()+ " " + addressList.get(0).getCity()+ " " + addressList.get(0).getCountry()+ " " +
@@ -175,7 +175,7 @@ public class EmployeeService {
 						if(bVal) {
 							departmentList = getDepartmentByEmployeeID(empDetails.getEmployeeId()); // Department List taken for multiple address of an Employee
 							if(departmentList != null) {
-								logger.info("Department ID ------- : "+ departmentList.get(0).getDepartmentId());
+								//logger.info("Department ID ------- : "+ departmentList.get(0).getDepartmentId());
 								empDetails.setEmployeeDepartmentName(departmentList.get(0).getDepartmentName());
 								empDetails.setEmployeeDepartmentLocation(departmentList.get(0).getDepartmentLocation());
 							}
@@ -232,7 +232,7 @@ public class EmployeeService {
 		ResponseEntity<List<Address_Master>> responseEntity = null;
 		List<Address_Master> addressList=null;
 		try {
-			logger.info("Matched Employee ID-------: "+ employeeId);
+			//logger.info("Matched Employee ID-------: "+ employeeId);
 			RestTemplate restTemplate = new RestTemplate();
 			//responseEntity = restTemplate.exchange("http://localhost:9002/restapiaddressservices/getAddressByEmployeeID/"+employeeId, HttpMethod.GET,
 			//		null, new ParameterizedTypeReference<List<Address_Master>>(){});
@@ -272,7 +272,7 @@ public class EmployeeService {
 		ResponseEntity<List<Department_Master>> responseEntity = null;
 		List<Department_Master> departmentList=null;
 		try {
-			logger.info("Matched Employee ID-------: "+ employeeId);
+			//logger.info("Matched Employee ID-------: "+ employeeId);
 			RestTemplate restTemplate = new RestTemplate();
 			//responseEntity = restTemplate.exchange("http://localhost:9001/restapidepartmentservices/getDepartmentByEmployeeID/"+employeeId, HttpMethod.GET,
 			//		null, new ParameterizedTypeReference<List<Department_Master>>(){});
